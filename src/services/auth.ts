@@ -18,12 +18,14 @@ export const getTokens = (usuario: any) => {
         String(usuario._id),
         usuario.name,
         usuario.email,
+        usuario.role,
         usuario.organizacion as mongoose.Types.ObjectId
     );
     const refreshToken = generateRefreshToken(
         String(usuario._id),
         usuario.name,
         usuario.email,
+        usuario.role,
         usuario.organizacion as mongoose.Types.ObjectId
     );
 
@@ -33,7 +35,7 @@ export const getTokens = (usuario: any) => {
 export const refreshUserSession = async (incomingRefreshToken: string) => {
     const payload = verifyRefreshToken(incomingRefreshToken);
     const usuario = await Usuario.findById(payload.id);
-    
+
     if (!usuario) throw new Error('Usuario no encontrado');
 
     const tokens = getTokens(usuario);

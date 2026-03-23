@@ -34,3 +34,14 @@ export const authenticateToken = (
     return res.status(401).json({ message: "Token inválido" });
   }
 };
+
+export const rolesAutorizados = (roles: string[]) => {
+  return (req: AuthRequest, res: Response, next: NextFunction) => {
+
+    if (!roles.includes(req.user!.role)) {
+      return res.status(403).json({ message: "Rol no incluido en el token" });
+    }
+
+    next();
+  };
+};
