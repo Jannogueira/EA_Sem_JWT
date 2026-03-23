@@ -39,7 +39,7 @@ export const rolesAutorizados = (roles: string[]) => {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
 
     if (!roles.includes(req.user!.role)) {
-      return res.status(403).json({ message: "Rol no incluido en el token" });
+      return res.status(403).json({ message: "Rol no permitido" });
     }
 
     next();

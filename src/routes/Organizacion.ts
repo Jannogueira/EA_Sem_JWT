@@ -2,6 +2,9 @@ import express from 'express';
 import controller from '../controllers/Organizacion';
 import { Schemas, ValidateJoi } from '../middleware/Joi';
 
+import { authenticateToken } from '../middleware/auth';
+import { rolesAutorizados } from '../middleware/auth';
+
 const router = express.Router();
 
 /**

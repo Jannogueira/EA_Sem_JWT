@@ -22,6 +22,7 @@ export interface LoginResponse {
     _id: string;
     name: string;
     email: string;
+    role: string;
     organizacion: string;
   };
 }
@@ -41,7 +42,7 @@ const API_URL = 'http://localhost:1337';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   /**
    * Registra un nuevo usuario. NO genera token.
@@ -113,5 +114,20 @@ export class AuthService {
 
     localStorage.removeItem(TOKEN_KEY);
     this.router.navigate(['/login']);
+  }
+
+
+  private decodeToken(token: string): any {
+    return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  getRole(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+    return this.decodeToken(token).role;
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'admin';
   }
 }
