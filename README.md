@@ -1,4 +1,4 @@
-# Seminario 7 EA — JWT (Arquitectura Profesional)
+# Ejercicio Seminario JWT - Jan Nogueira
 
 **Estudiante:** Jan Nogueira  
 **Nota:** Ejercicio desarrollado íntegramente sin uso de IA.
